@@ -7,14 +7,34 @@ function fetchDogs() {
 }
 
 function renderDogs(json) {
-  const dogImageContainer = document.querySelector("dog-image-container");
-  json.forEach(dog => {
+  const dogImageContainer = document.querySelector("#dog-image-container");
+  json.message.forEach(dog => {
     const img = document.createElement("img");
-    img.innerHTML = "Image Added";
+    img.src = dog;
     dogImageContainer.appendChild(img);
   });
 }
 
 document.addEventListener("DOMContentLoaded", function() {
   fetchDogs();
+});
+
+function fetchBreeds() {
+  return fetch("https://dog.ceo/api/breeds/list/all")
+    .then(resp => resp.json())
+    .then(json => renderBreeds(json));
+}
+
+function renderBreeds(json) {
+  console.log(json);
+  const dogBreeds = document.querySelector("#dog-breeds");
+  json.message.forEach(dog => {
+    const breed = document.createElement("breed");
+    breed.src = dog;
+    dogBreeds.appendChild(breed);
+  });
+}
+
+document.addEventListener("DomContentLoaded", function() {
+  fetchBreeds();
 });
